@@ -1,3 +1,11 @@
+![1](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/a87c0562-e05f-4384-903d-5d2f75e53cb9)
+![2](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/05275e57-e8a3-4d6f-bd74-3174496587f2)
+![3](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/b6289f24-f4b6-4a66-83ac-26d1d06793a7)
+![4](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/7cb2c1af-cfd3-4f44-9698-cda6c8176dac)
+![5](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/583555a5-6d0b-406c-ba74-e3f6fa6f1ddc)
+![6](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/9503c68d-9a82-41d4-85a6-10ba0f222a0d)
+![7](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/d84bc312-6a39-4296-a05f-b1171f60aea9)
+![8](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/cccfc462-54a7-4cc8-99ee-a3200b527787)
 # E-Commerce-usnig-back-End-asp.net-6-
  this E-commerce API, developed using ASP.NET Core 6, showcases a well-structured system design. It incorporates design patterns, integrates with Redis and SQL Server, utilizes LINQ for querying, and includes authentication and authorization for enhanced security. The API serves as a solid foundation for building scalable and feature-rich 
 The e-commerce API is built on the robust ASP.NET Core 6 framework, leveraging its powerful features and performance enhancements. It follows industry-standard practices and incorporates key design patterns to ensure maintainability, scalability, and extensibility.
