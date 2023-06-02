@@ -1,0 +1,31 @@
+﻿
+@model ProductViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add New Product</h1>
+<div class="container-fluid">
+    <form method="post" asp-action="Create" enctype="multipart/form-data">
+        <input hidden asp-for="PictureUrl" />
+        <partial name="CreatEditPartialView" model="Model" />
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function loadPreview(event) {
+            var preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+}

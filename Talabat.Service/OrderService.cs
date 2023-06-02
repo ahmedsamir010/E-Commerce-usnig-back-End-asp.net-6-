@@ -61,7 +61,7 @@ namespace Talabat.Service
 
             var order = new Order(buyerEmail, shippingAddress, deliverMethod, orderItems, subTotal, basket.PaymentIntentId);
 
-            await _unitOfWork.Repository<Order>().Add(order);
+            await _unitOfWork.Repository<Order>().AddAsync(order);
             await _unitOfWork.Complete();
 
             return order;

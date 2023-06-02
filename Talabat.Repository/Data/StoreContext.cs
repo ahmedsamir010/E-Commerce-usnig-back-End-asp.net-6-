@@ -31,6 +31,8 @@ namespace Talabat.Repository.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItems> OrderItems { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+        public DbSet<ProductRating> ProductRatings { get; set; }
+
 
 
     }

@@ -1,0 +1,236 @@
+﻿@model Pagination<ProductViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var totalPages = Math.Ceiling((double)Model.Count / Model.PageSize);
+}
+
+<h1>Product List</h1>
+
+<nav class="navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+                <form class="form-inline" asp-action="Search" asp-controller="Product">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar @Html.Raw((ViewData.ModelState["search"]?.Errors.Count > 0) ? "is-invalid" : "")" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    @if (ViewData.ModelState["search"]?.Errors.Count > 0)
+                    {
+                        <div class="invalid-feedback">@ViewData.ModelState["search"].Errors[0].ErrorMessage</div>
+                    }
+                </form>
+            </div>
+        </li>
+    </ul>
+</nav>
+<a asp-action="Create" class="btn btn-outline-primary m-2">Add New Product</a>
+
+@if (Model.Data.Count > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-bordered">
+                        <thead class="bg-light text-white text-center">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Picture</th>
+                                <th>Price</th>
+                                <th>Brand</th>
+                                <th>Type</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Data)
+                            {
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td>@product.Name</td>
+                                    <td>@product.Description</td>
+                                    <td><img class="img-thumbnail w-50 h-50" src="~/@product.PictureUrl" /></td>
+                                    <td>@product.Price</td>
+                                    <td>@product.ProductBrand.Name</td>
+                                    <td>@product.ProductType.Name</td>
+                                    <td>
+                                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@product.Id">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@product.Id">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination-container">
+        <ul class="pagination justify-content-center">
+            @if (totalPages <= 5)
+            {
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                        <form asp-action="Index">
+                            <input type="hidden" asp-for="@Model.PageIndex" value="@i" />
+                            <input type="submit" class="page-link" value="@i" />
+                        </form>
+                    </li>
+                }
+            }
+            else
+            {
+                int startPage = Math.Max(Model.PageIndex - 2, 1);
+                int endPage = Math.Min(startPage + 4, (int)totalPages);
+
+                if (endPage - startPage < 4)
+                {
+                    startPage = Math.Max(endPage - 4, 1);
+                }
+
+                if (startPage > 1)
+                {
+                    <li class="page-item">
+                        <form asp-action="Index">
+                            <input type="hidden" asp-for="@Model.PageIndex" value="1" />
+                            <input type="submit" class="page-link" value="1" />
+                        </form>
+                    </li>
+                    if (startPage > 2)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+                }
+
+                for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                        <form asp-action="Index">
+                            <input type="hidden" asp-for="@Model.PageIndex" value="@i" />
+                            <input type="submit" class="page-link" value="@i" />
+                        </form>
+                    </li>
+                }
+
+                if (endPage < totalPages)
+                {
+                    if (endPage < totalPages - 1)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+                    <li class="page-item">
+                        <form asp-action="Index">
+                            <input type="hidden" asp-for="@Model.PageIndex" value="@totalPages" />
+                            <input type="submit" class="page-link" value="@totalPages" />
+                        </form>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="mt-3 p-3 alert-warning">
+        <h2>There are no Products!</h2>
+    </div>
+}
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .pagination-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+        .pagination-container .page-item {
+            margin-right: 5px;
+        }
+
+        .pagination-container .page-link {
+            color: #333;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 6px 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+            .pagination-container .page-link:hover,
+            .pagination-container .page-item.active .page-link {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: #fff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            }
+
+        .pagination-container .page-item.disabled .page-link {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #adb5bd;
+            cursor: not-allowed;
+        }
+
+        .pagination-container .ellipsis {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: default;
+        }
+
+        .pagination-container .pagination-controls {
+            display: flex;
+            align-items: center;
+        }
+
+            .pagination-container .pagination-controls .page-link {
+                font-size: 14px;
+            }
+
+            .pagination-container .pagination-controls .pagination-info {
+                margin-right: 10px;
+            }
+
+            .pagination-container .pagination-controls .page-size-label {
+                margin-right: 5px;
+            }
+
+            .pagination-container .pagination-controls .page-size-select {
+                width: 70px;
+            }
+
+
+
+
+</style>

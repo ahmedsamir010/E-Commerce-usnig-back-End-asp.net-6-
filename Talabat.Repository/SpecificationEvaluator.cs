@@ -28,7 +28,7 @@ namespace Talabat.Repository
                 query = query.OrderBy(spec.OrderByDescending);
 
 
-            if (spec.IsPaginaionEnable)
+            if (spec.IsPaginationEnabled)
             {
                 query = query.Skip(spec.Skip).Take(spec.Take);
             }

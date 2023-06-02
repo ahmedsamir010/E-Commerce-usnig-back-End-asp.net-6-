@@ -128,7 +128,6 @@ namespace Talabat.Repository.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PictureUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -159,11 +158,51 @@ namespace Talabat.Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ProductBrands", (string)null);
+                });
+
+            modelBuilder.Entity("Talabat.Core.Entities.ProductRating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("RatingValue")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductBrands");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductRatings");
                 });
 
             modelBuilder.Entity("Talabat.Core.Entities.ProductType", b =>
@@ -284,9 +323,23 @@ namespace Talabat.Repository.Migrations
                     b.Navigation("ProductType");
                 });
 
+            modelBuilder.Entity("Talabat.Core.Entities.ProductRating", b =>
+                {
+                    b.HasOne("Talabat.Core.Entities.Product", null)
+                        .WithMany("productRatings")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Talabat.Core.Entities.Order_Aggregrate.Order", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Entities.Product", b =>
+                {
+                    b.Navigation("productRatings");
                 });
 #pragma warning restore 612, 618
         }

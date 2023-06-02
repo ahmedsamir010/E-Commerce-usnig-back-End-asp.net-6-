@@ -29,10 +29,10 @@ namespace API_01.Controllers
             _unitOfWork=unitOfWork;
             _mapper = mapper;
         }
+         
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-
-        [HttpGet]   
+        [HttpGet]
+        //[Cached(100)]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductsSpecParams productsSpecParams)
         {
             var spec=new ProductWithBrandTyprSpecification(productsSpecParams);
@@ -47,7 +47,7 @@ namespace API_01.Controllers
 
             return Ok(new Pagination<ProductToReturnDto>(productsSpecParams.PageIndex ,productsSpecParams.PageSize,count,data));
         }
-
+       
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ProductToReturnDto), 200)]

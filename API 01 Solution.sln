@@ -5,11 +5,13 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.API", "API 01\Talabat.API.csproj", "{C5F13ED5-3BDF-4DAC-B1D4-B90C71E9B4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.Core", "Talabat.Core\Talabat.Core.csproj", "{07F2A6D3-61F3-494A-937E-AD6FC6E15705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Core", "Talabat.Core\Talabat.Core.csproj", "{07F2A6D3-61F3-494A-937E-AD6FC6E15705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.Repository", "Talabat.Repository\Talabat.Repository.csproj", "{3E689B5D-2904-4F01-A95A-4DB6F4B271B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Repository", "Talabat.Repository\Talabat.Repository.csproj", "{3E689B5D-2904-4F01-A95A-4DB6F4B271B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.Service", "Talabat.Service\Talabat.Service.csproj", "{32816FA8-A105-4EEC-9642-F7ACAE944214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Service", "Talabat.Service\Talabat.Service.csproj", "{32816FA8-A105-4EEC-9642-F7ACAE944214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanal", "AdminPanal\AdminPanal.csproj", "{AF7F34DC-D45A-4938-9AFF-59C864A7C1B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{32816FA8-A105-4EEC-9642-F7ACAE944214}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32816FA8-A105-4EEC-9642-F7ACAE944214}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32816FA8-A105-4EEC-9642-F7ACAE944214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF7F34DC-D45A-4938-9AFF-59C864A7C1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7F34DC-D45A-4938-9AFF-59C864A7C1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF7F34DC-D45A-4938-9AFF-59C864A7C1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF7F34DC-D45A-4938-9AFF-59C864A7C1B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

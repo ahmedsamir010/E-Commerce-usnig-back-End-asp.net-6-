@@ -23,7 +23,7 @@ namespace Talabat.Core.Entities
         [ForeignKey("productType")]
         public int ProductTypeId { get; set; } // Foriegn Key : Not Allow Null
 
-
+        public List<ProductRating> productRatings { get; set; }
 
         public ProductType ProductType { get; set; }  // Navigational Property ==> [ ONE ]
 

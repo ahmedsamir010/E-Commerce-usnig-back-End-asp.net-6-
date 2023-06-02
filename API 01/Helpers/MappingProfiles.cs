@@ -13,7 +13,11 @@ namespace API_01.Helpers
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
                 .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
-                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductPictureUrlResolver>());
+                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductPictureUrlResolver>())
+                .ForMember(p => p.productRatings, o => o.MapFrom(P => P.productRatings))
+                .ForMember(a => a.AverageRating, o => o.MapFrom(a => a.productRatings.Any() ? a.productRatings.Average(p => p.RatingValue) : 0));
+
+            CreateMap<ProductRating, ProductRatingDto>().ReverseMap();
 
             CreateMap<AddressDto, Talabat.Core.Entities.Order_Aggregrate.Address>().ReverseMap();
 
@@ -31,6 +35,9 @@ namespace API_01.Helpers
                 .ForMember(d => d.ProductId, o => o.MapFrom(s => s.Product.ProductId))
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.Product.ProductName))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Product.PictureUrl));
+
+
+
         }
     }
 }

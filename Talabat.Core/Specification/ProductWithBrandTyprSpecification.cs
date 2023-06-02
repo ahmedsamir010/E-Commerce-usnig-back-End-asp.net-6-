@@ -1,54 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using Talabat.Core.Entities;
 
 namespace Talabat.Core.Specification
 {
     public class ProductWithBrandTyprSpecification : BaseSpecification<Product>
     {
-        // Get All Product
+        private readonly Expression<Func<Product, bool>> _criteria;
+
         public ProductWithBrandTyprSpecification(ProductsSpecParams productsSpecParams)
-            :base(P => 
-                     (string.IsNullOrEmpty(productsSpecParams.Search) || P.Name.ToLower().Contains(productsSpecParams.Search)) && 
-                     (!productsSpecParams.BrandId.HasValue || P.ProductBrandId == productsSpecParams.BrandId.Value) &&
-                     (!productsSpecParams.BrandId.HasValue || P.ProductTypeId == productsSpecParams.BrandId.Value))
-
+            : base(p =>
+                (string.IsNullOrEmpty(productsSpecParams.Search) ||
+                p.Name.ToLower().Contains(productsSpecParams.Search)) &&
+                (!productsSpecParams.BrandId.HasValue || p.ProductBrandId == productsSpecParams.BrandId.Value) &&
+                (!productsSpecParams.TypeId.HasValue || p.ProductTypeId == productsSpecParams.TypeId.Value))
         {
-            Includes.Add(P => P.ProductBrand);
-            Includes.Add(P => P.ProductType);
-            ApplyPagination(productsSpecParams.PageSize *(productsSpecParams.PageIndex - 1) , productsSpecParams.PageSize);
+            Includes.Add(p => p.ProductBrand);
+            Includes.Add(p => p.ProductType);
+            Includes.Add(R => R.productRatings);
+            ApplyPagination(productsSpecParams.PageSize * (productsSpecParams.PageIndex - 1), productsSpecParams.PageSize);
 
-            if(!string.IsNullOrEmpty(productsSpecParams.Sort))
+            if (!string.IsNullOrEmpty(productsSpecParams.Sort))
             {
-                switch (productsSpecParams.Sort) 
+                switch (productsSpecParams.Sort)
                 {
                     case "priceAsc":
-                        AddOrderBy(P => P.Price);
+                        AddOrderBy(p => p.Price);
                         break;
                     case "priceDesc":
-                        AddOrderByDesc(P => P.Price);  // Chck This End Point 
+                        AddOrderByDesc(p => p.Price);
                         break;
                     default:
-                        AddOrderBy(P => P.Name);
+                        AddOrderBy(p => p.Name);
                         break;
                 }
             }
 
-            // total size =100
-            //   page size =20
-            //   page index=3
-
-
-
         }
-        public ProductWithBrandTyprSpecification(int id):base(P => P.Id == id)
+        public ProductWithBrandTyprSpecification(int id)
+            : base(p => p.Id == id)
         {
-            Includes.Add(P => P.ProductBrand);
-            Includes.Add(P => P.ProductType);
+            Includes.Add(p => p.ProductBrand);
+            Includes.Add(p => p.ProductType);
+            Includes.Add(R => R.productRatings);
         }
+
+
 
     }
 }

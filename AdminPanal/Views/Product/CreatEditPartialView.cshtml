@@ -1,0 +1,49 @@
+﻿@model ProductViewModel
+
+@inject IUnitOfWork unitOfWork
+@{
+    var Types = new SelectList(unitOfWork.Repository<ProductType>().GetAllAsync().Result, "Id", "Name");
+    var Brands = new SelectList(unitOfWork.Repository<ProductBrand>().GetAllAsync().Result, "Id", "Name");
+}
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Price" class="control-label"></label>
+    <input asp-for="Price" class="form-control" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Image" class="control-label"></label>
+    <div class="custom-file">
+        <input asp-for="Image" type="file" accept="image/*" onchange="loadPreview(event)" class="custom-file-input" id="pictureUrlInput">
+        <label class="custom-file-label" for="pictureUrlInput">Choose file</label>
+    </div>
+    <span asp-validation-for="Image" class="text-danger"></span>
+    <div class="row mt-3">
+        <div class="col-md-3 m-auto">
+            <img id="preview" class="rounded img-fluid" />
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="ProductBrand" class="control-label"></label>
+    <select asp-for="ProductBrandId" asp-items="@Brands" class="form-control"></select>
+</div>
+
+<div class="form-group">
+    <label asp-for="ProductType" class="control-label"></label>
+    <select asp-for="ProductTypeId" asp-items="@Types" class="form-control"></select>
+</div>
+

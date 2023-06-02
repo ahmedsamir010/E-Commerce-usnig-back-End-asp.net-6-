@@ -18,10 +18,10 @@ namespace API_01.Dtos
 
 
         [ForeignKey("productType")]
-        public int ProductTypeId { get; set; } 
+        public int ProductTypeId { get; set; }
+        public List<ProductRatingDto> productRatings { get; set; }
 
-
-
+        public double AverageRating { get; set; } 
         public string ProductType { get; set; } 
     }
 }

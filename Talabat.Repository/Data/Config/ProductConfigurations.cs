@@ -16,7 +16,7 @@ namespace Talabat.Repository.Data.Config
             builder.Property(p => p.Price).IsRequired().HasColumnType("decimal(18,2)");
           //  builder.Property(P => P.Id).IsRequired();
           builder.Property(N => N.Name).IsRequired().HasMaxLength(100);
-            builder.Property(P => P.PictureUrl).IsRequired();
+            builder.Property(P => P.PictureUrl).IsRequired(false);
 
 
 

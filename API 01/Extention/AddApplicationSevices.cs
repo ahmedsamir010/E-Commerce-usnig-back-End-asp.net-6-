@@ -12,7 +12,7 @@ namespace API_01.Extention
     public static class ApplicationServicesExtention
     {
         public static IServiceCollection AddApplicationSevices(this IServiceCollection services)
-        {
+        {   
 
 
             services.AddScoped<IPaymentService, PaymentService>();
@@ -27,6 +27,8 @@ namespace API_01.Extention
 
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddScoped(typeof(IResponseCacheService), typeof(ResponseCacheService));
 
             //builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
             services.AddAutoMapper(typeof(MappingProfiles));
