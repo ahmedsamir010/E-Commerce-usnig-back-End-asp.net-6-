@@ -25,7 +25,9 @@ namespace API_01.Extention
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
             })
-            .AddEntityFrameworkStores<AppIdentityDbContext>();
+            .AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+
+            
 
             services.AddAuthentication(options =>
             {

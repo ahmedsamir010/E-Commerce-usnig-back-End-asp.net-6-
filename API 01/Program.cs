@@ -1,21 +1,15 @@
-using API_01.Errors;
 using API_01.Extention;
-using API_01.Helpers;
 using API_01.MiddleWare;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using Talabat.Core.Entities;
+using Talabat.Core.Entities.EmailSettings;
 using Talabat.Core.Entities.Identity;
-using Talabat.Core.Repositories;
-using Talabat.Repository;
+using Talabat.Core.Services;
 using Talabat.Repository.Data;
 using Talabat.Repository.Identity;
 using Talabat.Repository.Identity.SeedUsers;
-
+using Talabat.Service;
 namespace Talabat.API
 {
     public class Program
@@ -55,6 +49,11 @@ namespace Talabat.API
                 });
             });
 
+
+            builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+            builder.Services.AddTransient<IEmailService, EmailSettings>();
+            builder.Services.Configure<TwilloSettings>(builder.Configuration.GetSection("Twillio"));
+            builder.Services.AddTransient<ISmsServeice, SmsService>();
             #endregion
 
             var app = builder.Build();

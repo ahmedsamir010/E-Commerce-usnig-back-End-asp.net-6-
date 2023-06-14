@@ -90,7 +90,6 @@ namespace API_01.Controllers
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
                 UserName = registerDto.Email.Split("@")[0],
-                PhoneNumber = registerDto.PhoneNumber,
                 Address= new Address()
             // Add any additional properties you want to set
         };
@@ -166,7 +165,7 @@ namespace API_01.Controllers
 
             var user = await _userManager.FindUserWithAddressAsync(User);
 
-            address.Id = user.Address.Id;
+            address.Id = user.Address.Id;   
         
             user.Address=address;
 

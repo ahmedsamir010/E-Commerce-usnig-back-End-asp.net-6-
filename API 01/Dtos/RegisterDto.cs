@@ -12,8 +12,6 @@ namespace API_01.Dtos
         [Required]
         
         public string Password { get; set; }
-        [Required]
-        [Phone]
-        public string PhoneNumber { get; set; }
+
     }
 }
