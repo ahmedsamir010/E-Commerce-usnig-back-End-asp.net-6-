@@ -3,6 +3,8 @@ using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
+using System.Text;
+using System.Threading.Tasks;
 using Talabat.Core.Entities.EmailSettings;
 using Talabat.Core.Services;
 
@@ -25,7 +27,14 @@ namespace Talabat.Service
             mail.To.Add(MailboxAddress.Parse(email.To));
 
             var builder = new BodyBuilder();
-            builder.TextBody = email.Body;
+            if (email.IsHtml)
+            {
+                builder.HtmlBody = email.Body; // Set the email body as HTML
+            }
+            else
+            {
+                builder.TextBody = email.Body; // Set the email body as plain text
+            }
             mail.Body = builder.ToMessageBody();
 
             mail.From.Add(new MailboxAddress(options.DisplayName, options.Email));

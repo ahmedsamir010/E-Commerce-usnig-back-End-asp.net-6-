@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using Talabat.Core.Entities.EmailSettings;
@@ -37,7 +38,28 @@ namespace API_01.Controllers
                 var encodeToken = Encoding.UTF8.GetBytes(token);
                 var newToken = WebEncoders.Base64UrlEncode(encodeToken);
                 var confirmLink = $"http://localhost:4200/passwordconfirm?ID={user.Id}&Token={newToken}";
-                var emailBody = $"Please click the following link to reset your password: {confirmLink}";
+
+                // HTML template for the email body
+                var emailBody = $@"
+                    <html>
+                    <body style='text-align: center;'>
+                        <div style='background-color: #f4f4f4; padding: 20px; display: inline-block;'>
+                            <h2 style='color: #333; font-size: 18px; margin-bottom: 10px;'>Reset Password</h2>
+                            <p style='color: #555; font-size: 16px;'>Hello {user.UserName},</p>
+                            <p style='color: #555; font-size: 16px;'>Please click the button below to reset your password:</p>
+                            <div style='text-align: center; margin: 20px 0;'>
+                                <a href='{confirmLink}' style='background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;'>
+                                    Reset Password
+                                </a>
+                            </div>
+                            <p style='color: #555; font-size: 16px;'>If you didn't request a password reset, please ignore this email.</p>
+                            <p style='color: #555; font-size: 16px;'>Thank you,</p>
+                            <p style='color: #555; font-size: 16px;'>Market Team</p>
+                        </div>
+                    </body>
+                    </html>
+                ";
+
                 var subject = "Reset Password";
 
                 try
@@ -46,7 +68,8 @@ namespace API_01.Controllers
                     {
                         To = user.Email,
                         Subject = subject,
-                        Body = emailBody
+                        Body = emailBody,
+                        IsHtml = true // Set IsHtml to true to indicate that the email body contains HTML
                     };
 
                     await emailService.SendEmailAsync(email);
@@ -65,7 +88,6 @@ namespace API_01.Controllers
                 return NotFound(new ApiResponse(404, "Email Doesn't Exist"));
             }
         }
-
 
         //[HttpPost]
         //public async Task<IActionResult> SendSmsAsync(ResetPasswordDto resetPasswordDto)
