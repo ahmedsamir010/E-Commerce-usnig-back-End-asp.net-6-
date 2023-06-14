@@ -62,26 +62,17 @@ namespace API_01.Controllers
 
                 var subject = "Reset Password";
 
-                try
+                var email = new Email
                 {
-                    var email = new Email
-                    {
-                        To = user.Email,
-                        Subject = subject,
-                        Body = emailBody,
-                        IsHtml = true // Set IsHtml to true to indicate that the email body contains HTML
-                    };
+                    To = user.Email,
+                    Subject = subject,
+                    Body = emailBody,
+                    IsHtml = true // Set IsHtml to true to indicate that the email body contains HTML
+                };
 
-                    await emailService.SendEmailAsync(email);
+                await emailService.SendEmailAsync(email);
 
-                    return Ok("Reset Password Email Sent");
-                }
-                catch (Exception ex)
-                {
-                    // Handle exception occurred during email sending
-                    // You can log the exception or return an appropriate error message
-                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while sending the reset password email.");
-                }
+                return Ok("Reset Password Email Sent");
             }
             else
             {
@@ -89,7 +80,7 @@ namespace API_01.Controllers
             }
         }
 
-        //[HttpPost]
+        //[HttpPost("sms")]
         //public async Task<IActionResult> SendSmsAsync(ResetPasswordDto resetPasswordDto)
         //{
         //    var user = await userManager.FindByEmailAsync(resetPasswordDto.Email);
