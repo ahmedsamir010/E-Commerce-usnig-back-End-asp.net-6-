@@ -1,3 +1,5 @@
+# Link Video :
+https://www.linkedin.com/posts/ahmed-samir-sakr-_%D8%A7%D9%84%D8%AD%D9%85%D8%AF%D9%84%D9%84%D9%87-%D8%A7%D9%86%D8%AA%D9%87%D9%8A%D8%AA-%D9%85%D9%86-%D8%B9%D9%85%D9%84-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-e-commerce-activity-7098668320811331584-NkYZ?utm_source=share&utm_medium=member_desktop
 ![1](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/a87c0562-e05f-4384-903d-5d2f75e53cb9)
 ![2](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/05275e57-e8a3-4d6f-bd74-3174496587f2)
 ![3](https://github.com/ahmedsamir010/E-Commerce-usnig-back-End-asp.net-6-/assets/89707420/b6289f24-f4b6-4a66-83ac-26d1d06793a7)
@@ -23,3 +25,4 @@ For data persistence, the API employs Microsoft SQL Server, a reliable and scala
 Security is a paramount concern in any e-commerce system, and this API addresses it by incorporating robust authentication and authorization mechanisms. With authentication, users can securely access their accounts and perform various actions based on their roles and permissions. Authorization ensures that only authorized users can access specific resources and perform authorized operations, safeguarding the integrity and confidentiality of the system.
 
 #Overall, this e-commerce API implemented using ASP.NET Core 6 showcases a well-structured and efficient system design. It leverages design patterns, integrates with essential technologies such as Redis and SQL Server, utilizes LINQ for seamless data querying, and incorporates authentication and authorization for enhanced security. This API serves as a solid foundation for building scalable and feature-rich e-commerce applications.
+
